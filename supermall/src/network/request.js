@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export function request(config) {
   const instance = axios.create({
+    baseURL: 'http://152.136.185.210:8000/api/n3',
     // baseURL: '请添加coderwhy002微信好友获取最新接口地址',
   timeout: 10000
 })

@@ -10,7 +10,8 @@
     </a>
   </div> -->
   <div class="goods-item">
-    <img :src="GoodsItem.showLarge.img" alt="">
+    <!-- Vue创建了load函数用来监听图片是否加载完成 -->
+    <img :src="GoodsItem.showLarge.img" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{GoodsItem.title}}</p>
       <span class="price">{{GoodsItem.price}}</span>
@@ -28,6 +29,12 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  methods: {
+    imageLoad() {
+      this.$bus.$emit('itemImageLoad')
+      // console.log('imageLoad');
     }
   }
 }

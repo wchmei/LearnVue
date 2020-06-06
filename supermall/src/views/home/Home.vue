@@ -81,6 +81,16 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
+
+
+  },
+
+  mounted() {
+            // 3监听itme中图片加载完成 itemImageLoad,最好放到 mountedl里面来，这样才能保证能获取到scroll
+    this.$bus.$on('itemImageLoad', () => {
+      console.log('itemImageLoad');
+      this.$refs.scroll.refresh()
+    })
   },
 
   methods: {

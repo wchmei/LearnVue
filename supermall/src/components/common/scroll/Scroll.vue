@@ -45,6 +45,11 @@ export default {
       this.$emit('scroll', position)
     })
 
+    // 解决上拉的时候回卡住的bug，主要原因是 this.scroll.scrollerHeight的值在图片加载之前就获取好了
+    // 所以scrollerHeight的值需要在所有图片加载完成以后再来一次 this.scroll.refresh()获得最新的值
+    console.log(this.scroll);
+
+
     // 监听上拉加载更多
     this.scroll.on('pullingUp', () => {
       this.$emit('pullingUp')
@@ -53,10 +58,13 @@ export default {
   },
   methods: {
     scrollTo(x, y, time=300) {
-      this.scroll.scrollTo(x, y, time)
+      this.scroll && this.scroll.scrollTo(x, y, time)
     },
     finishPullUp() {
-      this.scroll.finishPullUp()
+      this.scroll && this.scroll.finishPullUp()
+    },
+    refresh() {
+      this.scroll && this.scroll.refresh()
     }
   }
 }
